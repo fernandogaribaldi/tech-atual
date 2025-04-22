@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Notícias atualizadas sobre tecnologia e aplicativos">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Adcash -->
+<script type="text/javascript" src="//a.adcash.com/script/java.php?option=rotator"></script>
   <style>
     body {
       background: linear-gradient(to right, #e0f7fa, #fff);
@@ -24,6 +26,27 @@
     <h1 class="text-center mb-4">TechAtual 🚀</h1>
     <p class="text-center text-muted">As últimas notícias sobre tecnologia e aplicativos</p>
     <div id="noticias" class="row mt-4"></div>
+     <script>
+  const apiKey = 'b0037ae02a6841b98279c569d045e065';
+  const url = `https://newsapi.org/v2/everything?q=tecnologia&language=pt&sortBy=publishedAt&apiKey=${apiKey}`;
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      const container = document.getElementById('noticias');
+      data.articles.slice(0, 5).forEach(article => {
+        const item = document.createElement('div');
+        item.innerHTML = `
+          <h3><a href="${article.url}" target="_blank">${article.title}</a></h3>
+          <p>${article.description || ''}</p>
+        `;
+        container.appendChild(item);
+      });
+    })
+    .catch(err => {
+      console.error('Erro ao carregar notícias:', err);
+    });
+</script>
   </div>
 
   <script>
